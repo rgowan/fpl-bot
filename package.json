@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
-    "schedule": "yarn install && yarn start"
+    "schedule": "npm install && npm start"
   },
   "dependencies": {
     "dotenv": "^6.0.0",
