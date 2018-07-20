@@ -24,7 +24,9 @@ async function createMessage(channel) {
     messageArray.push(playerString);
   });
 
-  bot.postMessageToChannel('general', messageArray.join(''));
+  bot
+    .postMessageToChannel('general', messageArray.join(''))
+    .then(() => process.exit());
 }
 
 createMessage();
