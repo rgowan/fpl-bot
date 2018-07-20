@@ -24,5 +24,5 @@ async function createMessage(channel) {
     messageArray.push(playerString);
   });
 
-  bot.postMessageToChannel('fpl', messageArray.join(''));
+  bot.postMessageToChannel('general', messageArray.join(''));
 }
