@@ -12,13 +12,12 @@ createMessage();
 
 async function createMessage(channel) {
   try {
+    const players = await getRoundScores();
+
     const messageArray = [
-      '>>>',
       'Here are the top performers from last GW ⚽️️️️️ 🏆\n\n',
       'Score | Name | Club | Price | Position | Form\n\n'
     ];
-
-    const players = await getRoundScores();
 
     players.forEach((player) => {
       const playerString = `${player.score}\t${player.name} ${player.club} ${player.cost} ${player.position} ${player.form}\n\n`;
@@ -27,6 +26,6 @@ async function createMessage(channel) {
 
     bot.postMessageToChannel('general', messageArray.join(''));
   } catch (err) {
-    console.log(err);
+    console.log('something went wrong');
   }
 }
