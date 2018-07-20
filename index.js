@@ -11,18 +11,22 @@ const bot = new SlackBot({
 createMessage();
 
 async function createMessage(channel) {
-  const messageArray = [
-    '>>>',
-    'Here are the top performers from last GW ⚽️️️️️ 🏆\n\n',
-    'Score | Name | Club | Price | Position | Form\n\n'
-  ];
+  try {
+    const messageArray = [
+      '>>>',
+      'Here are the top performers from last GW ⚽️️️️️ 🏆\n\n',
+      'Score | Name | Club | Price | Position | Form\n\n'
+    ];
 
-  const players = await getRoundScores();
+    const players = await getRoundScores();
 
-  players.forEach((player) => {
-    const playerString = `${player.score}\t${player.name} ${player.club} ${player.cost} ${player.position} ${player.form}\n\n`;
-    messageArray.push(playerString);
-  });
+    players.forEach((player) => {
+      const playerString = `${player.score}\t${player.name} ${player.club} ${player.cost} ${player.position} ${player.form}\n\n`;
+      messageArray.push(playerString);
+    });
 
-  bot.postMessageToChannel('general', messageArray.join(''));
+    bot.postMessageToChannel('general', messageArray.join(''));
+  } catch (err) {
+    console.log(err);
+  }
 }
