@@ -1,10 +1,9 @@
 const puppeteer = require('puppeteer');
-const url = 'https://fantasy.premierleague.com/a/statistics/event_points';
 
 async function getTopPlayers() {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
-  await page.goto(url);
+  await page.goto('https://fantasy.premierleague.com/a/statistics/event_points');
 
   let data = await page.evaluate(() => {
     const topPlayers = [];
