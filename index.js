@@ -11,7 +11,7 @@ const bot = new SlackBot({
   name: 'FPL Bot'
 });
 
-async function createMessage(channel) {
+async function createMessage() {
   const players = await getRoundScores();
 
   const messageArray = [
@@ -29,6 +29,6 @@ async function createMessage(channel) {
     .then(() => process.exit());
 }
 
-createMessage();
+new Date().getDay() === 5 ? createMessage() : process.exit();
 
 app.listen(PORT);
