@@ -1,14 +1,16 @@
+const express = require('express');
 const SlackBot = require('slackbots');
 const getRoundScores = require('./scripts/getRoundScores');
+const PORT = process.env.PORT || 3000;
 
 require('dotenv').config();
+
+const app = express();
 
 const bot = new SlackBot({
   token: process.env.ACCESS_TOKEN,
   name: 'FPL Bot'
 });
-
-createMessage();
 
 async function createMessage(channel) {
   try {
@@ -29,3 +31,7 @@ async function createMessage(channel) {
     console.log('something went wrong');
   }
 }
+
+createMessage();
+
+app.listen(PORT);
