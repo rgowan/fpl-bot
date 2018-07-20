@@ -1,0 +1,16 @@
+{
+  "name": "web-scraper",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "puppeteer": "^1.6.0",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
+    "slackbots": "^1.1.0"
+  }
+}
