@@ -19,8 +19,6 @@ async function getTotalScores() {
     const playerTotalScoreAll = document.querySelectorAll('tr td:nth-child(6)');
 
     for(let index = 0; index < 10; index++) {
-      const playerShirtSrc = playerKitAll[index].srcset.split('\n')[1].trim().slice(0, -6);
-
       const player = {
         name: playerNameAll[index].innerText,
         club: playerClubAll[index].innerText,
@@ -28,7 +26,6 @@ async function getTotalScores() {
         cost: playerPriceAll[index].innerText,
         selectedBy: playerSelectedByAll[index].innerText,
         form: playerFormAll[index].innerText,
-        shirt: `https://fantasy.premierleague.com${playerShirtSrc}`,
         score: playerTotalScoreAll[index].innerText
       };
 
@@ -59,8 +56,6 @@ async function getRoundScores() {
     const playerRoundScoreAll = document.querySelectorAll('tr td:nth-child(7)');
 
     for(let index = 0; index < 10; index++) {
-      const playerShirtSrc = playerKitAll[index].srcset.split('\n')[1].trim().slice(0, -6);
-
       const player = {
         name: playerNameAll[index].innerText,
         club: playerClubAll[index].innerText,
@@ -68,7 +63,6 @@ async function getRoundScores() {
         cost: playerPriceAll[index].innerText,
         selectedBy: playerSelectedByAll[index].innerText,
         form: playerFormAll[index].innerText,
-        shirt: `https://fantasy.premierleague.com${playerShirtSrc}`,
         score: playerRoundScoreAll[index].innerText
       };
 

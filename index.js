@@ -10,10 +10,19 @@ const app = express();
 function sendMessages() {
   roundScoreMessage();
   totalScoreMessage();
+
+  // roundScoreMessage()
+  // .then(() => {
+  //   totalScoreMessage();
+  // });
 }
 
 // new Date().getDay() === 5 ? sendMessages() : process.exit();
 
 sendMessages();
+
+// totalScoreMessage();
+// roundScoreMessage();
+
 
 app.listen(PORT);
