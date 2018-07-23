@@ -12,7 +12,6 @@ async function getTotalScores() {
     const playerNameAll = document.querySelectorAll('.ismjs-show-element.ism-table--el__name');
     const playerClubAll = document.querySelectorAll('.ism-table--el__strong');
     const playerPositionAll = document.querySelectorAll('.ism-table--el__pos');
-    const playerKitAll = document.querySelectorAll('.ism-media__figure picture source');
     const playerPriceAll = document.querySelectorAll('tr td:nth-child(3)');
     const playerSelectedByAll = document.querySelectorAll('tr td:nth-child(4)');
     const playerFormAll = document.querySelectorAll('tr td:nth-child(5)');
@@ -49,7 +48,6 @@ async function getRoundScores() {
     const playerNameAll = document.querySelectorAll('.ismjs-show-element.ism-table--el__name');
     const playerClubAll = document.querySelectorAll('.ism-table--el__strong');
     const playerPositionAll = document.querySelectorAll('.ism-table--el__pos');
-    const playerKitAll = document.querySelectorAll('.ism-media__figure picture source');
     const playerPriceAll = document.querySelectorAll('tr td:nth-child(3)');
     const playerSelectedByAll = document.querySelectorAll('tr td:nth-child(4)');
     const playerFormAll = document.querySelectorAll('tr td:nth-child(5)');
