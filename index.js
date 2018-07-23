@@ -12,6 +12,8 @@ function sendMessages() {
   totalScoreMessage();
 }
 
-new Date().getDay() === 5 ? sendMessages() : process.exit();
+// new Date().getDay() === 5 ? sendMessages() : process.exit();
+
+sendMessages();
 
 app.listen(PORT);
