@@ -12,7 +12,7 @@ const bot = new SlackBot({
   name: 'FPL Bot'
 });
 
-function extractRoundPlayerInfo() {
+function extractPlayerInfo() {
   const players = [];
 
   const playerNameAll = document.querySelectorAll('.ismjs-show-element.ism-table--el__name');
@@ -30,7 +30,7 @@ function extractRoundPlayerInfo() {
       cost: playerPriceAll[i].innerText,
       form: playerFormAll[i].innerText,
       score: playerScoreAll[i].innerText
-    }
+    };
 
     players.push(player);
   }
@@ -45,23 +45,19 @@ async function getPlayerData() {
   });
 
   const page = await browser.newPage();
+  await page.goto(
+    'https://fantasy.premierleague.com/a/statistics/event_points', {
+      waitUntil: 'networkidle2'
+    }
+  );
 
-  // await page.goto('https://fantasy.premierleague.com/a/statistics/total_points');
-  // let totalScores = await page.evaluate(extractTotalPlayerInfo);
-
-  await page.goto('https://fantasy.premierleague.com/a/statistics/event_points', { waitUntil: 'networkidle2' });
-  let roundScores = await page.evaluate(extractRoundPlayerInfo);
-
+  let roundScores = await page.evaluate(extractPlayerInfo);
   return roundScores;
 }
 
-async function createMessage(type) {
-  const messageTitle = type === 'round' ?
-    '>>>* Here are the top performers from last GW ⚽️️️️️ ⭐️*\n\n' :
-    '>>>* Here are the top performers from this season ⚽️️️️️ 🏆*\n\n';
-
+async function createMessage() {
   const messageArray = [
-    messageTitle,
+    '>>>* Here are the top performers from last GW ⚽️️️️️ ⭐️*\n\n',
     'Score | Name | Club | Price | Position | Form\n\n'
   ];
 
@@ -72,15 +68,13 @@ async function createMessage(type) {
     messageArray.push(playerString);
   });
 
-  return messageArray;
+  return messageArray.join('');
 }
 
 async function sendMessage() {
-  const roundScore = await createMessage('round');
-
-  bot
-    .postMessageToChannel('general', roundScore.join(''))
-    .then(() => process.exit());
+  const message = await createMessage();
+  await bot.postMessageToChannel('general', message);
+  process.exit();
 }
 
 sendMessage();
