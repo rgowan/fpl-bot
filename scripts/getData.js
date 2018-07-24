@@ -1,78 +1,71 @@
 const puppeteer = require('puppeteer');
 
-async function getTotalScores() {
-  const browser = await puppeteer.launch({ headless: true });
+// function extractTotalPlayerInfo() {
+//   const players = [];
 
-  const page = await browser.newPage();
-  await page.goto('https://fantasy.premierleague.com/a/statistics/total_points');
+//   const playerNameAll = document.querySelectorAll('.ismjs-show-element.ism-table--el__name');
+//   const playerClubAll = document.querySelectorAll('.ism-table--el__strong');
+//   const playerPositionAll = document.querySelectorAll('.ism-table--el__pos');
+//   const playerPriceAll = document.querySelectorAll('tr td:nth-child(3)');
+//   const playerFormAll = document.querySelectorAll('tr td:nth-child(5)');
+//   const playerScoreAll = document.querySelectorAll('tr td:nth-child(6)');
 
-  let data = await page.evaluate(() => {
-    const topPlayers = [];
+//   for (let i = 0; i < 10; i++) {
+//     const player = {
+//       name: playerNameAll[i].innerText,
+//       club: playerClubAll[i].innerText,
+//       position: playerPositionAll[i].innerText,
+//       cost: playerPriceAll[i].innerText,
+//       form: playerFormAll[i].innerText,
+//       score: playerScoreAll[i].innerText
+//     }
 
-    const playerNameAll = document.querySelectorAll('.ismjs-show-element.ism-table--el__name');
-    const playerClubAll = document.querySelectorAll('.ism-table--el__strong');
-    const playerPositionAll = document.querySelectorAll('.ism-table--el__pos');
-    const playerPriceAll = document.querySelectorAll('tr td:nth-child(3)');
-    const playerSelectedByAll = document.querySelectorAll('tr td:nth-child(4)');
-    const playerFormAll = document.querySelectorAll('tr td:nth-child(5)');
-    const playerTotalScoreAll = document.querySelectorAll('tr td:nth-child(6)');
+//     players.push(player);
+//   }
 
-    for(let index = 0; index < 10; index++) {
-      const player = {
-        name: playerNameAll[index].innerText,
-        club: playerClubAll[index].innerText,
-        position: playerPositionAll[index].innerText,
-        cost: playerPriceAll[index].innerText,
-        selectedBy: playerSelectedByAll[index].innerText,
-        form: playerFormAll[index].innerText,
-        score: playerTotalScoreAll[index].innerText
-      };
+//   return players;
+// }
 
-      topPlayers.push(player);
+function extractRoundPlayerInfo() {
+  const players = [];
+
+  const playerNameAll = document.querySelectorAll('.ismjs-show-element.ism-table--el__name');
+  const playerClubAll = document.querySelectorAll('.ism-table--el__strong');
+  const playerPositionAll = document.querySelectorAll('.ism-table--el__pos');
+  const playerPriceAll = document.querySelectorAll('tr td:nth-child(3)');
+  const playerFormAll = document.querySelectorAll('tr td:nth-child(5)');
+  const playerScoreAll = document.querySelectorAll('tr td:nth-child(7)');
+
+  for (let i = 0; i < 10; i++) {
+    const player = {
+      name: playerNameAll[i].innerText,
+      club: playerClubAll[i].innerText,
+      position: playerPositionAll[i].innerText,
+      cost: playerPriceAll[i].innerText,
+      form: playerFormAll[i].innerText,
+      score: playerScoreAll[i].innerText
     }
-    return topPlayers;
-  });
 
-  return data;
+    players.push(player);
+  }
+
+  return players;
 }
 
-async function getRoundScores() {
-  const browser = await puppeteer.launch({ headless: true });
+async function getPlayerData() {
+  const browser = await puppeteer.launch({
+    headless: true
+  });
 
   const page = await browser.newPage();
+
+  // await page.goto('https://fantasy.premierleague.com/a/statistics/total_points');
+  // let totalScores = await page.evaluate(extractTotalPlayerInfo);
+
   await page.goto('https://fantasy.premierleague.com/a/statistics/event_points');
+  let roundScores = await page.evaluate(extractRoundPlayerInfo);
 
-  let data = await page.evaluate(() => {
-    const topPlayers = [];
-
-    const playerNameAll = document.querySelectorAll('.ismjs-show-element.ism-table--el__name');
-    const playerClubAll = document.querySelectorAll('.ism-table--el__strong');
-    const playerPositionAll = document.querySelectorAll('.ism-table--el__pos');
-    const playerPriceAll = document.querySelectorAll('tr td:nth-child(3)');
-    const playerSelectedByAll = document.querySelectorAll('tr td:nth-child(4)');
-    const playerFormAll = document.querySelectorAll('tr td:nth-child(5)');
-    const playerRoundScoreAll = document.querySelectorAll('tr td:nth-child(7)');
-
-    for(let index = 0; index < 10; index++) {
-      const player = {
-        name: playerNameAll[index].innerText,
-        club: playerClubAll[index].innerText,
-        position: playerPositionAll[index].innerText,
-        cost: playerPriceAll[index].innerText,
-        selectedBy: playerSelectedByAll[index].innerText,
-        form: playerFormAll[index].innerText,
-        score: playerRoundScoreAll[index].innerText
-      };
-
-      topPlayers.push(player);
-    }
-    return topPlayers;
-  });
-
-  return data;
+  return roundScores;
 }
 
-module.exports = {
-  getRoundScores,
-  getTotalScores
-}
+module.exports = getPlayerData;
