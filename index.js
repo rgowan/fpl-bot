@@ -49,7 +49,7 @@ async function getPlayerData() {
   // await page.goto('https://fantasy.premierleague.com/a/statistics/total_points');
   // let totalScores = await page.evaluate(extractTotalPlayerInfo);
 
-  await page.goto('https://fantasy.premierleague.com/a/statistics/event_points');
+  await page.goto('https://fantasy.premierleague.com/a/statistics/event_points', { waitUntil: 'networkidle2' });
   let roundScores = await page.evaluate(extractRoundPlayerInfo);
 
   return roundScores;
