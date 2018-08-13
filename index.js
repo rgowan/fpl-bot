@@ -77,8 +77,6 @@ async function sendMessage() {
   process.exit();
 }
 
-// (new Date).getDay() === 5 ? sendMessage() : process.exit();
-
-sendMessage()
+(new Date).getDay() === 5 ? sendMessage() : process.exit();
 
 app.listen(PORT);
