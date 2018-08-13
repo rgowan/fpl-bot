@@ -73,10 +73,10 @@ async function createMessage() {
 
 async function sendMessage() {
   const message = await createMessage();
-  await bot.postMessageToChannel('general', message);
+  await bot.postMessageToChannel('fantasy-football', message);
   process.exit();
 }
 
-sendMessage();
+(new Date).getDay() === 5 ? sendMessage() : process.exit();
 
 app.listen(PORT);
